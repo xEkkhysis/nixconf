@@ -5,7 +5,7 @@
   # Core desktop apps (managed)
   programs.firefox = {
     enable = true;
-    profiles.default.settings."browser.startup.homepage" = "https://google.com"\;
+    profiles.default.settings."browser.startup.homepage" = "https://google.com";
   };
 
   programs.vscode = {
@@ -13,8 +13,12 @@
     extensions = with pkgs.vscode-extensions; [ rust-lang.rust-analyzer ];
   };
 
-  programs.thunderbird.enable = true;
-
+  programs.thunderbird = {
+  enable = true;
+  profiles.default = {
+    isDefault = true;
+    };
+  };
   # Extra desktop apps
   home.packages = with pkgs; [
     discord                             # unfree
@@ -27,10 +31,9 @@
     wireguard-tools
     networkmanagerapplet
     networkmanager-openconnect openconnect
-    networkmanager-wireguard
     # JetBrains RustRover (unfree)
     jetbrains.rust-rover
     # SQL client GUI (OSS)
-    dbeaver
+    dbeaver-bin
   ];
 }

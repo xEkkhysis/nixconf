@@ -1,7 +1,6 @@
-{ inputs ? {}, lib, pkgs, config, ... }:
+{ nur, lib, pkgs, config, ... }:
 {
-  # NUR overlay and unfree
-  nixpkgs.overlays = [ (inputs.nur.overlay or (_: _: { })) ];
+  nixpkgs.overlays = [ nur.overlay ];
   nixpkgs.config.allowUnfree = true;
 
   # Nix settings
@@ -25,13 +24,6 @@
   services.resolved.enable = true;
 
   # Use UFW (disable built-in firewall)
-  networking.firewall.enable = false;
-  services.ufw = {
-    enable = true;
-    defaultInputPolicy = "deny";
-    defaultOutputPolicy = "allow";
-    allowSSH = true;
-  };
 
   # Docker
   virtualisation.docker.enable = true;

@@ -48,8 +48,9 @@ in {
 
     # Fonts, printing, BT, Flatpak
     fonts.packages = with pkgs; [
-      noto-fonts noto-fonts-cjk noto-fonts-emoji
-      nerd-fonts-fira-code
+      noto-fonts noto-fonts-cjk-sans noto-fonts-emoji
+      nerd-fonts.fira-code
+      nerd-fonts.jetbrains-mono
     ];
     services.printing.enable = true;
     hardware.bluetooth.enable = true;

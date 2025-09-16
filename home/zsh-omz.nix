@@ -7,8 +7,8 @@
       theme = "agnoster";
       plugins = [ "git" "fzf" "docker" "kubectl" "z" ];
     };
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
+    enableAutosuggestions = true;
+    enableSyntaxHighlighting = true;
     enableCompletion = true;
     history = { size = 50000; save = 50000; share = true; };
     shellAliases = {
