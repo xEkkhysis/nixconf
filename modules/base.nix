@@ -1,10 +1,11 @@
 { nur, lib, pkgs, config, ... }:
 {
-  nixpkgs.overlays = [ nur.overlay ];
+  nixpkgs.overlays = [ nur.overlays.default ];
   nixpkgs.config.allowUnfree = true;
 
   # Nix settings
   nix.settings = {
+    warn-dirty = false;
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
   };
@@ -50,4 +51,10 @@
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
+
+  
+  # Bootloader
+  boot.loader.systemd-boot.enable = true;        # UEFI boot
+  boot.loader.efi.canTouchEfiVariables = true;   # write EFI vars
+
 }

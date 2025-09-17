@@ -7,8 +7,8 @@
       theme = "agnoster";
       plugins = [ "git" "fzf" "docker" "kubectl" "z" ];
     };
-    enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
     enableCompletion = true;
     history = { size = 50000; save = 50000; share = true; };
     shellAliases = {
@@ -17,7 +17,7 @@
       gc = "git commit";
       gp = "git push";
     };
-    initExtra = ''
+    initContent = ''
       export EDITOR=nvim
       bindkey -e
     '';

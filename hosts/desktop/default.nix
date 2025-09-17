@@ -1,8 +1,18 @@
 { lib, config, pkgs, ... }:
 {
   nixpkgs.hostPlatform = "x86_64-linux";
+  
+  i18n.defaultLocale = "de_DE.UTF-8";
+  i18n.supportedLocales = [ "de_DE.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
 
-  my.desktop.variant = "sway";  # or "cosmic"
+  services.xserver.xkb.layout = "de";
+  services.xserver.xkb.variant = "nodeadkeys";
+  services.xserver.xkb.options = "caps:swapescape";
+
+  console.keyMap = "de-latin1-nodeadkeys";
+  
+
+  my.desktop.variant = "cosmic";  # or "cosmic"
   my.desktop.login   = "gdm";
 
   home-manager = {
@@ -14,9 +24,10 @@
         [
           ../../home/common.nix
           ../../home/zsh-omz.nix
-          ../../home/alacritty.nix
+          ../../home/fontcache.nix
+          ../../home/foot.nix
         ]
-        ++ lib.optionals (config.my.desktop.variant == "sway")   [ ../../home/sway.nix ]
+        ++ lib.optionals (config.my.desktop.variant == "sway")   [ ../../home/swayfdir.nix ]
         ++ lib.optionals (config.my.desktop.variant == "cosmic") [ ../../home/cosmic.nix ];
     };
   };

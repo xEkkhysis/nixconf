@@ -5,12 +5,12 @@ in {
   options.my.desktop = {
     variant = lib.mkOption {
       type = lib.types.enum [ "sway" "cosmic" ];
-      default = "sway";
+      default = "cosmic";  # you said you'll use COSMIC for now
       description = "Select desktop environment.";
     };
     login = lib.mkOption {
       type = lib.types.enum [ "gdm" "cosmic-greeter" "greetd" ];
-      default = "gdm";
+      default = "cosmic-greeter";
       description = "Display/login manager to use.";
     };
   };
@@ -18,11 +18,9 @@ in {
   config = {
     services.xserver.enable = true;
 
-    # GDM (default)
+    # Display managers
     services.displayManager.gdm.enable = (cfg.login == "gdm");
     services.displayManager.gdm.wayland = (cfg.login == "gdm");
-
-    # COSMIC greeter (optional)
     services.displayManager.cosmic-greeter.enable = (cfg.login == "cosmic-greeter");
 
     # greetd (only meaningful for sway)
@@ -36,19 +34,40 @@ in {
 
     # Desktop branches
     programs.sway.enable = (cfg.variant == "sway");
-
     services.desktopManager.cosmic.enable = (cfg.variant == "cosmic");
 
-    # Wayland helpers for Sway
+    # Portals
     xdg.portal.enable = true;
+    # Sway-specific portal
     xdg.portal.wlr.enable = lib.mkIf (cfg.variant == "sway") true;
-    hardware.opengl.enable  = lib.mkIf (cfg.variant == "sway") true;
+    # COSMIC portals
+    xdg.portal.extraPortals = lib.mkIf (cfg.variant == "cosmic") (with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-cosmic
+    ]);
+
+    # Graphics (needed for both Sway and COSMIC)
+    hardware.graphics.enable = true;
+
+    # Only set this WLR var on Sway
     environment.variables.WLR_NO_HARDWARE_CURSORS =
       lib.mkIf (cfg.variant == "sway") "1";
 
+    # Audio (PipeWire)
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      wireplumber.enable = true;
+    };
+
     # Fonts, printing, BT, Flatpak
+    fonts.fontconfig.enable = true;
     fonts.packages = with pkgs; [
-      noto-fonts noto-fonts-cjk-sans noto-fonts-emoji
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-emoji
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
     ];
@@ -56,7 +75,7 @@ in {
     hardware.bluetooth.enable = true;
     services.flatpak.enable = true;
 
-    # Make Zsh the default shell on desktop systems
+    # Zsh as default shell on desktop systems
     programs.zsh.enable = true;
     environment.shells = [ pkgs.bashInteractive pkgs.zsh ];
     users.defaultUserShell = pkgs.zsh;
