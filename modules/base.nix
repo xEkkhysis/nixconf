@@ -2,18 +2,16 @@
 {
   nixpkgs.overlays = [ nur.overlays.default ];
   nixpkgs.config.allowUnfree = true;
+  
+  imports = [
+	./disko.nix
+     ];
 
   # Nix settings
   nix.settings = {
     warn-dirty = false;
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
-  };
-
-  # VM-friendly root so nixos-generators -f qcow works
-  fileSystems."/" = {
-    fsType = lib.mkForce "ext4";
-    device = "/dev/disk/by-label/nixos";
   };
 
   # Time/locale basics

@@ -28,7 +28,7 @@
         ./hosts/desktop
         home-manager.nixosModules.home-manager
         # agenix.nixosModules.default   # enable when you add secrets
-        # disko.nixosModules.disko      # enable only for bare metal installs
+        disko.nixosModules.disko      # enable only for bare metal installs
       ];
 
       headless = mkSystem "x86_64-linux" [
@@ -36,7 +36,7 @@
         ./modules/headless.nix
         ./hosts/headless
         # agenix.nixosModules.default
-        # disko.nixosModules.disko
+        disko.nixosModules.disko
       ];
     };
   };
