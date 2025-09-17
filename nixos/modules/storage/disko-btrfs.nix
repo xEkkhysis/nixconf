@@ -66,9 +66,9 @@ in {
       disk.main = {
         type = "disk";
         device = cfg.device;
-        wipeTable = true;
         content = {
           type = "gpt";
+	  wipeTable = true;
           partitions = {
             ESP = {
               type = "partition";
@@ -77,7 +77,7 @@ in {
               priority = 1;
               bootable = true;
               name = "ESP";
-              type = "EF00";
+              part-type = "EF00";
               content = {
                 type = "filesystem";
                 format = "vfat";
