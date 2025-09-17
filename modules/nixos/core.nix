@@ -1,40 +1,32 @@
-{ nur, lib, pkgs, config, ... }:
+{ pkgs, ... }:
 {
-  nixpkgs.overlays = [ nur.overlays.default ];
   nixpkgs.config.allowUnfree = true;
-  
-  imports = [
-	./disko.nix
-     ];
 
-  # Nix settings
   nix.settings = {
     warn-dirty = false;
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
   };
 
-  # Time/locale basics
   time.timeZone = "Europe/Berlin";
   system.stateVersion = "24.05";
 
-  # Networking base
   networking.networkmanager.enable = true;
   services.resolved.enable = true;
 
-  # Use UFW (disable built-in firewall)
-
-  # Docker
   virtualisation.docker.enable = true;
 
-  # Common user (adjust later if you like)
   users.users.tom = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" ];
     initialPassword = "test";
+    shell = pkgs.zsh;
   };
 
-  # CLI tool stack (headless + desktop)
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
+  environment.shells = [ pkgs.bashInteractive pkgs.zsh ];
+
   environment.systemPackages = with pkgs; [
     nano vim git curl wget
     ripgrep fd eza bat jq yq tree
@@ -50,9 +42,19 @@
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
-  
-  # Bootloader
-  boot.loader.systemd-boot.enable = true;        # UEFI boot
-  boot.loader.efi.canTouchEfiVariables = true;   # write EFI vars
+  fonts.fontconfig.enable = true;
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-emoji
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
+  ];
 
+  hardware.bluetooth.enable = true;
+  services.printing.enable = true;
+  services.flatpak.enable = true;
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 }
