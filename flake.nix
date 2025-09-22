@@ -13,7 +13,7 @@
   inputs = {
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixos-cosmic/nixpkgs";
+      inputs.nixpkgs.follows = "nixos-cosmic/nixpkgs-stable";
     };
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
