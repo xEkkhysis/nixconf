@@ -1,6 +1,10 @@
 {pkgs, ...}:
-imports = [./fish.nix];
+
 {
+  imports = [
+    ./fish.nix
+  ];
+
   programs.zoxide = {
   enable = true;
   enableFishIntegration = true;
