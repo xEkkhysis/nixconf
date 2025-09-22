@@ -68,7 +68,7 @@
   environment.systemPackages = with pkgs; [
   git
   neovim
-  stable.zed-editor
+  zed-editor
   ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
