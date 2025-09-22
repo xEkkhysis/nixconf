@@ -28,4 +28,5 @@
   };
   home-manager.users.toml =
     import ../../../home/toml/${config.networking.hostName}.nix;
+  home-manager.backupFileExtension = "backup";
 }
