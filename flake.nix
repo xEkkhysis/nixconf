@@ -16,8 +16,8 @@
       inputs.nixpkgs.follows = "nixos-cosmic/nixpkgs-stable";
     };
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
   };
 
   outputs = { self, home-manager, nixos-cosmic, nixpkgs, ... }@inputs:
