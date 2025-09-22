@@ -4,10 +4,10 @@
   ../features/cli
 
 ];
-# features = {
-# cli = {
-#   fish.enable = true;
-# };
-# };
+features = {
+cli = {
+  fish.enable = true;
+};
+};
 
 }
