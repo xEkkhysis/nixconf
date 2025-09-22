@@ -85,6 +85,8 @@
   };
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.desktopManager.cosmic.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
