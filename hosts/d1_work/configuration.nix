@@ -81,6 +81,7 @@
   # List services that you want to enable:
   services.desktopManager.cosmic.enable = true;
   services.displayManager.cosmic-greeter.enable = true;
+  services.desktopManager.cosmic.xwayland.enable = true;
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
