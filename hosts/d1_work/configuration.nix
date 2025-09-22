@@ -79,14 +79,11 @@
   # };
 
   # List services that you want to enable:
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
   services.desktopManager.cosmic.enable = true;
   services.displayManager.cosmic-greeter.enable = true;
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
