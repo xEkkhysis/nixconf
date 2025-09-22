@@ -21,8 +21,8 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
-    pkgs.warp-terminal
+  home.packages = with pkgs; [
+    warp-terminal
     fish
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
